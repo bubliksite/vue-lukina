@@ -1,18 +1,39 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Loader v-if="loader" />
+    <div v-else class="page">
+      <Header />
+      <VideoBackground v-if="media" :src="media.source_url" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+  import VideoBackground from '../components/VideoBackground'
+  import Loader from '../components/Loader'
+  import Header from '../components/Header'
+  import {mapState} from 'vuex'
+  import {actionTypes as homeActionTypes} from '../store/modules/homePage'
+  import {actionTypes as mediaActionTypes} from '../store/modules/getMedia'
 
-export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  export default {
+    name: 'Home',
+    components: {Header, Loader, VideoBackground},
+    computed: {
+      ...mapState({
+        page: (state) => state.homePage.page,
+        loader: (state) => state.homePage.isLoading,
+        errorsPage: (state) => state.homePage.errors,
+        media: (state) => state.getMedia.media,
+        errorsMedia: (state) => state.getMedia.errors
+      })
+    },
+    mounted() {
+      this.$store.dispatch(homeActionTypes.getHomePage).then((response) => {
+        this.$store.dispatch(mediaActionTypes.getMedia, {
+          mediaId: response.homeVideo
+        })
+      })
+    }
   }
-}
 </script>
