@@ -44,7 +44,9 @@
   .video-background {
     position: relative;
     video {
-      max-width: 100vw;
+      width: 100vw;
+      max-height: 100vh;
+      object-fit: cover;
     }
     .video-controls {
       z-index: 3;

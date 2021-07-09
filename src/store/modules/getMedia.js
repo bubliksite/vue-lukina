@@ -13,18 +13,22 @@ export const actionTypes = {
 export default {
   state: {
     media: null,
+    isLoading: null,
     errors: null
   },
   mutations: {
     [mutationTypes.getMediaStart](state) {
       state.media = null
       state.errors = null
+      state.isLoading = true
     },
     [mutationTypes.getMediaSuccess](state, payload) {
       state.media = payload
+      state.isLoading = false
     },
     [mutationTypes.getMediaFailure](state, payload) {
       state.errors = payload
+      state.isLoading = false
     }
   },
   actions: {

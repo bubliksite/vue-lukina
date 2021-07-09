@@ -1,11 +1,11 @@
 <template>
-  <div>About Page</div>
+  <h1>Blog</h1>
 </template>
 
 <script>
   export default {
-    name: 'About'
+    name: 'Blog'
   }
 </script>
 
-<style scoped></style>
+<style lang="scss"></style>

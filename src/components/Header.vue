@@ -3,25 +3,10 @@
     <div class="container">
       <div class="d-flex justify-content-between">
         <Logo />
-        <nav class="nav">
-          <router-link
-            :to="{name: 'About'}"
-            class="nav-link"
-            active-class="active"
-          >
-            О центре
-            <div><div class="underline"></div></div>
-          </router-link>
-          <router-link
-            :to="{name: 'Programs'}"
-            class="nav-link"
-            active-class="active"
-          >
-            О центре
-            <div><div class="underline"></div></div>
-          </router-link>
-          <div class="nav-icons"></div>
-        </nav>
+        <div class="d-flex justify-content-center align-items-center">
+          <NavMenu />
+          <IconMenu />
+        </div>
       </div>
     </div>
   </header>
@@ -29,9 +14,11 @@
 
 <script>
   import Logo from './Logo'
+  import NavMenu from './NavMenu'
+  import IconMenu from './IconMenu'
   export default {
     name: 'Header',
-    components: {Logo}
+    components: {IconMenu, NavMenu, Logo}
   }
 </script>
 
