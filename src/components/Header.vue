@@ -12,6 +12,14 @@
             О центре
             <div><div class="underline"></div></div>
           </router-link>
+          <router-link
+            :to="{name: 'Programs'}"
+            class="nav-link"
+            active-class="active"
+          >
+            О центре
+            <div><div class="underline"></div></div>
+          </router-link>
           <div class="nav-icons"></div>
         </nav>
       </div>
