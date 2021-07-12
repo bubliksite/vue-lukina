@@ -20,8 +20,8 @@
         </div>
       </div>
       <div v-if="!contentIsCollapse">
-        <div v-html="page.homeTitle" class="mb-5"></div>
-        <div v-html="page.homeSubtitle" class="lead mb-5"></div>
+        <div v-html="title" class="mb-5"></div>
+        <div v-html="subTitle" class="lead mb-5"></div>
         <router-link :to="{name: 'Contact'}" class="btn btn-outline">
           НАПИСАТЬ
         </router-link>
@@ -35,8 +35,12 @@
   export default {
     name: 'SlideContent',
     props: {
-      page: {
-        type: Object,
+      title: {
+        type: String,
+        required: false
+      },
+      subTitle: {
+        type: String,
         required: false
       }
     },
@@ -69,7 +73,7 @@
     width: auto;
     position: absolute;
     overflow: hidden;
-    bottom: 1.5rem;
+    bottom: 4rem;
     left: 0;
   }
   .lead {

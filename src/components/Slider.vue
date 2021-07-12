@@ -1,15 +1,35 @@
 <template>
-  <div class="slider position-relative">
-    <VideoBackground v-if="media" :src="media.source_url" />
-    <div
-      class="d-flex justify-content-center align-items-center position-absolute top-0 w-100 h-100"
-    >
-      <SlideContent :page="page" />
-    </div>
+  <div class="slider">
+    <carousel :items="1">
+      <div
+        class="slide position-relative"
+        v-for="(slide, index) in page.customFields.homeVideo"
+        :key="index"
+      >
+        <VideoBackground :id="slide" />
+        <div
+          class="
+            d-flex
+            justify-content-center
+            align-items-center
+            position-absolute
+            top-0
+            w-100
+            h-100
+          "
+        >
+          <SlideContent
+            :title="page.customFields.homeTitle[index]"
+            :subTitle="page.customFields.homeSubtitle[index]"
+          />
+        </div>
+      </div>
+    </carousel>
   </div>
 </template>
 
 <script>
+  import carousel from 'vue-owl-carousel2'
   import VideoBackground from '../components/VideoBackground'
   import SlideContent from './SlideContent'
 
@@ -19,17 +39,18 @@
       page: {
         type: Object,
         required: true
-      },
-      media: {
-        type: Object,
-        required: true
       }
     },
     components: {
       VideoBackground,
-      SlideContent
+      SlideContent,
+      carousel
     }
   }
 </script>
 
-<style scoped></style>
+<style lang="scss">
+  .owl-theme .owl-nav {
+    display: none;
+  }
+</style>

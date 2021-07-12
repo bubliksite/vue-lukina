@@ -8,17 +8,18 @@
         <Icon :src="pause" />
       </div>
     </div>
-    <video ref="videoBackground" :src="src"></video>
+    <video ref="videoBackground" :src="media.source_url"></video>
   </div>
 </template>
 
 <script>
+  import {actionTypes as mediaActionTypes} from '../store/modules/getMedia'
   import Icon from './Icon'
   export default {
     name: 'VideoBackground',
     components: {Icon},
     props: {
-      src: {
+      id: {
         type: String,
         required: true
       }
@@ -26,8 +27,16 @@
     data() {
       return {
         play: require('../assets/images/icons/icon-play.svg'),
-        pause: require('../assets/images/icons/icon-pause.svg')
+        pause: require('../assets/images/icons/icon-pause.svg'),
+        media: ''
       }
+    },
+    mounted() {
+      this.$store
+        .dispatch(mediaActionTypes.getMedia, {
+          mediaId: this.id
+        })
+        .then((response) => (this.media = response))
     },
     methods: {
       playVideo() {
@@ -41,6 +50,35 @@
 </script>
 
 <style lang="scss">
+  @import 'src/assets/styles/variables';
+  .owl-theme .owl-dots .owl-dot:hover span {
+    border-color: $text-yellow;
+    background-color: $text-yellow;
+    opacity: 0.5;
+  }
+  .owl-carousel .owl-item img {
+    width: unset;
+  }
+  .owl-theme .owl-dots {
+    position: absolute;
+    bottom: 1.5rem;
+    width: 100%;
+    z-index: 2;
+    .owl-dot {
+      span {
+        width: 15px;
+        height: 15px;
+        border: 1px solid #fff;
+        background-color: transparent;
+      }
+      &.active {
+        span {
+          border-color: $text-yellow;
+          background-color: $text-yellow;
+        }
+      }
+    }
+  }
   .video-background {
     position: relative;
     video {
@@ -51,7 +89,7 @@
     .video-controls {
       z-index: 3;
       position: absolute;
-      bottom: 1.5rem;
+      bottom: 4rem;
       width: 100%;
       display: flex;
       justify-content: center;
