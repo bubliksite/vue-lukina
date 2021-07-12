@@ -2,13 +2,16 @@
   <nav class="nav">
     <router-link
       :to="{name: item.name}"
+      :exact="item.exact"
       class="nav-link"
       active-class="active"
       v-for="item in menu"
       :key="item.name"
     >
       {{ item.title }}
-      <div><div class="underline"></div></div>
+      <div class="active-element">
+        <div class="underline"></div>
+      </div>
     </router-link>
   </nav>
 </template>
@@ -19,6 +22,11 @@
     data() {
       return {
         menu: [
+          {
+            title: 'Главная',
+            name: 'Home',
+            exact: true
+          },
           {
             title: 'О центре',
             name: 'About'
@@ -46,8 +54,29 @@
 </script>
 
 <style lang="scss" scoped>
+  @import 'src/assets/styles/variables';
   nav {
     margin-right: 3rem;
     font-size: 16px;
+    a.nav-link {
+      font-weight: 400;
+      color: #fff;
+      &:hover {
+        @extend a;
+      }
+      &.active {
+        .active-element {
+          display: flex;
+          justify-content: center;
+          margin-top: 0.35rem;
+          .underline {
+            width: 40px;
+            height: 1px;
+            border-bottom: 1px solid $text-yellow;
+          }
+        }
+      }
+    }
+
   }
 </style>

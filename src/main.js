@@ -6,6 +6,7 @@ import store from './store'
 
 import 'bootstrap/scss/bootstrap.scss'
 import './assets/styles/fonts.scss'
+import './assets/styles/global.scss'
 
 Vue.config.productionTip = false
 

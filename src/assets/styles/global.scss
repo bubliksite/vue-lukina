@@ -1,0 +1,23 @@
+@import 'variables';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', 'sans-serif';
+}
+
+.btn {
+  padding: 10px 0;
+  min-width: 350px;
+  border-color: $text-yellow;
+  border-radius: 0;
+  border-width: 2px;
+  color: #fff !important;
+  font-size: 18px;
+  :hover {
+    @extend .btn;
+  }
+}

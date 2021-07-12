@@ -1,24 +1,24 @@
 <template>
   <div>
-    <Loader v-if="loader || mediaLoader" />
-    <div v-else class="page">
+    <Loader v-if="loader" />
+    <div v-else>
       <Header />
-      <VideoBackground v-if="media" :src="media.source_url" />
+      <Slider v-if="page && media" :page="page" :media="media" />
     </div>
   </div>
 </template>
 
 <script>
-  import VideoBackground from '../components/VideoBackground'
-  import Loader from '../components/Loader'
   import Header from '../components/Header'
+  import Loader from '../components/Loader'
   import {mapState} from 'vuex'
   import {actionTypes as pageActionTypes} from '../store/modules/getPage'
   import {actionTypes as mediaActionTypes} from '../store/modules/getMedia'
+  import Slider from '../components/Slider'
 
   export default {
     name: 'Home',
-    components: {Header, Loader, VideoBackground},
+    components: {Slider, Loader, Header},
     computed: {
       ...mapState({
         page: (state) => state.homePage.page,
@@ -42,3 +42,5 @@
     }
   }
 </script>
+
+<style scoped lang="scss"></style>

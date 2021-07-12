@@ -4,7 +4,8 @@
 
 <script>
   export default {
-    name: 'About'
+    name: 'About',
+    mounted() {}
   }
 </script>
 

@@ -23,28 +23,8 @@
 </script>
 
 <style lang="scss">
-  @import 'src/assets/styles/variables';
   header {
     z-index: 1;
     top: 0;
-    a.nav-link {
-      font-weight: 400;
-      color: #fff;
-      &.active {
-        div {
-          display: flex;
-          justify-content: center;
-          margin-top: 0.35rem;
-          .underline {
-            width: 40px;
-            height: 1px;
-            border-bottom: 1px solid $text-yellow;
-          }
-        }
-      }
-      &:hover {
-        @extend a;
-      }
-    }
   }
 </style>
