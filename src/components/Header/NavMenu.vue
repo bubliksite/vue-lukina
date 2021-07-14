@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav">
+  <nav :class="{'flex-column mt-3': isMobile}" class="nav">
     <router-link
       :to="{name: item.name}"
       :exact="item.exact"
@@ -9,7 +9,7 @@
       :key="item.name"
     >
       {{ item.title }}
-      <div class="active-element">
+      <div class="active-element" :class="{'d-none': isMobile}">
         <div class="underline"></div>
       </div>
     </router-link>
@@ -19,6 +19,12 @@
 <script>
   export default {
     name: 'NavMenu',
+    props: {
+      isMobile: {
+        required: false,
+        type: Boolean
+      }
+    },
     data() {
       return {
         menu: [
@@ -54,7 +60,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'src/assets/styles/variables';
+  @import '../../assets/styles/variables';
   nav {
     margin-right: 3rem;
     font-size: 16px;
@@ -77,6 +83,27 @@
         }
       }
     }
-
+  }
+  @media screen and (max-width: 1200px) {
+    .nav-link {
+      font-size: 14px;
+      img {
+        width: 20px;
+      }
+    }
+  }
+  @media screen and (max-width: 850px) {
+    .nav-link {
+      font-size: 13px;
+      padding: 0.5rem;
+    }
+  }
+  @media screen and (max-width: 740px) {
+    nav {
+      margin: 0 auto;
+      max-width: 100%;
+      width: fit-content;
+      font-size: 18px;
+    }
   }
 </style>

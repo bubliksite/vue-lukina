@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,300;1,400;1,600;1,700;1,800&display=swap');
+
 body {
   font-family: 'Raleway', 'sans-serif';
 }
 
-h1 {
-  font-size: 64px;
+i,
+em {
+  font-family: Raleway;
+  font-style: italic;
 }

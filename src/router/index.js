@@ -3,9 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import About from '../views/About'
 import Services from '../views/Services'
-import Programs from '../views/Programs'
+import Program from '../views/AllPrograms'
 import Blog from '../views/Blog'
 import Contact from '../views/Contact'
+import AllPrograms from '../views/AllPrograms'
 
 Vue.use(VueRouter)
 
@@ -22,8 +23,13 @@ const routes = [
   },
   {
     path: '/programs',
-    name: 'Programs',
-    component: Programs
+    name: 'AllPrograms',
+    component: AllPrograms
+  },
+  {
+    path: '/programs/:slug',
+    name: 'Program',
+    component: Program
   },
   {
     path: '/services',

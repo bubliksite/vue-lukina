@@ -232,4 +232,10 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  @media screen and (max-width: 1200px) {
+    svg {
+      width: 100px;
+    }
+  }
+</style>
