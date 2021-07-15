@@ -39,7 +39,7 @@
           },
           {
             title: 'Программы',
-            name: 'Programs'
+            name: 'AllPrograms'
           },
           {
             title: 'Услуги',

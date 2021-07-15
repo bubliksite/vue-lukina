@@ -5,7 +5,7 @@
       <Header />
       <Slider v-if="homePage" :homePage="homePage" />
       <section class="excerpt bg-primary">
-        <div class="container py-lg-5 py-md-3 py-2">
+        <div class="container py-5">
           <hr />
           <h3 class="text-center py-lg-5 py-md-3 py-2">
             <em v-if="homePage" v-html="homePage.customFields.excerpt[0]"></em>
@@ -13,7 +13,7 @@
           <hr />
         </div>
       </section>
-      <section class="programs py-lg-5 py-md-3 py-2 bg-white">
+      <section class="programs py-5 bg-white">
         <div class="container">
           <SectionHeader title="Программы" />
           <div class="row">
@@ -34,6 +34,22 @@
           />
         </div>
       </section>
+      <section class="bg-white">
+        <div class="container py-5">
+          <SectionHeader title="Философия" />
+          <Philosophy
+            v-if="homePage"
+            :texts="{
+              partText: homePage.customFields.partText[0],
+              cardText: homePage.customFields.cardText[0]
+            }"
+            :images="{
+              desktopImageId: homePage.customFields.imageDesktop[0],
+              mobileImageId: homePage.customFields.imageMobile[0]
+            }"
+          />
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -47,10 +63,12 @@
   import ProgramExcerpt from '../components/Home/ProgramExcerpt'
   import SectionHeader from '../components/SectionHeader'
   import AboutCenter from '../components/Home/AboutCenter'
+  import Philosophy from '../components/Home/Philosophy'
 
   export default {
     name: 'Home',
     components: {
+      Philosophy,
       AboutCenter,
       SectionHeader,
       ProgramExcerpt,

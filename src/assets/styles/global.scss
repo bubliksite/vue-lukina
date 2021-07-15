@@ -75,9 +75,6 @@ h2 {
   h1 {
     font-size: 28px;
   }
-  h2 {
-    font-size: 21px;
-  }
   .btn {
     min-width: 180px;
     font-size: 14px;
@@ -87,9 +84,6 @@ h2 {
 @media screen and (max-width: 420px) {
   h1 {
     font-size: 24px;
-  }
-  h2 {
-    font-size: 18px;
   }
   .btn {
     min-width: unset;
@@ -101,9 +95,6 @@ h2 {
 @media screen and (max-width: 320px) {
   h1 {
     font-size: 18px;
-  }
-  h2 {
-    font-size: 13px;
   }
   .btn {
     min-width: unset;
