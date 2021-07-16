@@ -39,28 +39,40 @@
         </div>
         <div class="col-md-5 my-3">
           <h6>Контакты</h6>
-          <nav class="nav flex-column mt-3">
+          <nav class="nav flex-column mt-3 text-lg-start text-center">
             <a class="nav-link fw-bold" href="tel: +7 925 391 84 33">
               +7 925 391 84 33
             </a>
             <a class="py-2" href="mailto: olga.aleksandrovna.lukina@yandex.ru">
               olga.aleksandrovna.lukina@yandex.ru
             </a>
-            <p class="m-0">
+            <p class="m-0 text-body">
               Москва, ул. Трубная д. 32, стр. 3, 1-й этаж, офис 12 <br />
               Психологический Центр. 10 минут пешком от станций метро Цветной
               Бульвар или Сухаревская
             </p>
-            <SmallSocialLinks align="start" />
+            <SmallSocialLinks
+              class="justify-content-lg-start justify-content-center"
+            />
           </nav>
         </div>
       </div>
-      <div class="d-flex align-items-center">
-        <Logo />
+      <div
+        class="
+          d-lg-flex
+          align-items-center
+          d-lg-flex d-block
+          footer-end
+          text-lg-start text-center
+        "
+      >
+        <div class="logo">
+          <Logo />
+        </div>
         <router-link class="mx-3" :to="{name: 'Legal'}"
           >Документы и юридическая информация</router-link
         >
-        |
+        <span class="d-lg-block d-none">|</span>
         <p class="my-0 mx-3">© 2001 — {{ year }} Ольга Лукина</p>
       </div>
     </div>
@@ -115,8 +127,17 @@
     color: $dark-red;
   }
   @media screen and (max-width: 420px) {
-    footer {
+    .logo {
+      display: none;
+    }
+    footer.bg-primary {
       background-image: none;
+    }
+    .footer-end {
+      a,
+      p {
+        font-size: 12px;
+      }
     }
   }
 </style>

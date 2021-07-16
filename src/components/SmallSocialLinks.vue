@@ -1,5 +1,5 @@
 <template>
-  <div class="social_icons d-flex" :class="`justify-content-${align}`">
+  <div class="social_icons d-flex">
     <a href="#">
       <Icon :src="icons.instagram" />
     </a>
@@ -21,9 +21,6 @@
     name: 'SmallSocialLinks',
     components: {
       Icon
-    },
-    props: {
-      align: String
     },
     data() {
       return {

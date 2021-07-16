@@ -9,7 +9,7 @@
           <img :src="photoUrl" alt="" />
         </div>
         <p class="mt-3 excerpt">{{ excerpt }}</p>
-        <SmallSocialLinks align="center" />
+        <SmallSocialLinks class="justify-content-center" />
       </div>
     </div>
   </div>
