@@ -2,7 +2,7 @@
   <header class="position-absolute w-100 py-lg-3 py-1">
     <div class="container">
       <div class="d-flex justify-content-between">
-        <Logo />
+        <Logo color="white" />
         <div class="menu">
           <div class="d-flex justify-content-center align-items-center">
             <NavMenu />
@@ -14,9 +14,9 @@
             <div @click="openMenu" role="button">
               <Icon :src="burger" />
             </div>
-            <router-link :to="{name: 'Lk'}">
+            <a href="lk.domain.name">
               <Icon :src="person" />
-            </router-link>
+            </a>
           </div>
           <div
             ref="mobileMenu"

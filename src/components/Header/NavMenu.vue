@@ -1,15 +1,16 @@
 <template>
-  <nav :class="{'flex-column mt-3': isMobile}" class="nav">
+  <nav :class="{'flex-column mt-3': isMobile || isFooter}" class="nav">
     <router-link
       :to="{name: item.name}"
       :exact="item.exact"
+      :class="{'footer-nav': isFooter}"
       class="nav-link"
       active-class="active"
       v-for="item in menu"
       :key="item.name"
     >
       {{ item.title }}
-      <div class="active-element" :class="{'d-none': isMobile}">
+      <div class="active-element" v-if="!(isMobile || isFooter)">
         <div class="underline"></div>
       </div>
     </router-link>
@@ -23,16 +24,12 @@
       isMobile: {
         required: false,
         type: Boolean
-      }
+      },
+      isFooter: Boolean
     },
     data() {
       return {
         menu: [
-          {
-            title: 'Главная',
-            name: 'Home',
-            exact: true
-          },
           {
             title: 'О центре',
             name: 'About'
@@ -67,6 +64,12 @@
     a.nav-link {
       font-weight: 400;
       color: #fff;
+      &.footer-nav {
+        color: black;
+        padding-left: 0;
+        padding-bottom: 0;
+        padding-top: 0.1rem;
+      }
       &:hover {
         @extend a;
       }

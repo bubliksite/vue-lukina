@@ -7,6 +7,8 @@ import Program from '../views/AllPrograms'
 import Blog from '../views/Blog'
 import Contact from '../views/Contact'
 import AllPrograms from '../views/AllPrograms'
+import PostBlog from '../views/PostBlog'
+import Legal from '../views/Legal'
 
 Vue.use(VueRouter)
 
@@ -42,9 +44,19 @@ const routes = [
     component: Blog
   },
   {
+    path: '/blog/:slug',
+    name: 'PostBlog',
+    component: PostBlog
+  },
+  {
     path: '/contact',
     name: 'Contact',
     component: Contact
+  },
+  {
+    path: '/legal',
+    name: 'Legal',
+    component: Legal
   }
 ]
 

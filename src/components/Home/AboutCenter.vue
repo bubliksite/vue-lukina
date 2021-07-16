@@ -9,20 +9,7 @@
           <img :src="photoUrl" alt="" />
         </div>
         <p class="mt-3 excerpt">{{ excerpt }}</p>
-        <div class="social_icons d-flex justify-content-center">
-          <a href="#">
-            <Icon :src="icons.instagram" />
-          </a>
-          <a href="#">
-            <Icon :src="icons.facebook" />
-          </a>
-          <a href="#">
-            <Icon :src="icons.youtube" />
-          </a>
-          <a href="#">
-            <Icon :src="icons.telegram" />
-          </a>
-        </div>
+        <SmallSocialLinks align="center" />
       </div>
     </div>
   </div>
@@ -30,11 +17,11 @@
 
 <script>
   import {actionTypes as mediaActionTypes} from '../../store/modules/getMedia'
-  import Icon from '../Icon'
+  import SmallSocialLinks from '../SmallSocialLinks'
 
   export default {
     name: 'AboutCenter',
-    components: {Icon},
+    components: {SmallSocialLinks},
     props: {
       description: {
         type: String,
