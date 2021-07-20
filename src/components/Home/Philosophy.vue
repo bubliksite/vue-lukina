@@ -1,11 +1,11 @@
 <template>
   <div class="py-5">
-    <p v-html="texts.partText"></p>
+    <p v-html="partText"></p>
     <div class="py-3">
       <img class="desktop mx-auto" :src="desktopImageUrl" alt="" />
       <img class="mobile mx-auto" :src="mobileImageUrl" alt="" />
     </div>
-    <p class="p-3 mt-3 bg-gray" v-html="texts.cardText"></p>
+    <p class="p-3 mt-3 bg-gray" v-html="cardText"></p>
     <div class="d-flex justify-content-end mt-4">
       <em>
         Подробнее о направлениях работы, услугах и специалистах центра смотрите
@@ -21,14 +21,10 @@
   export default {
     name: 'Philosophy',
     props: {
-      texts: {
-        type: Object,
-        required: true
-      },
-      images: {
-        type: Object,
-        required: true
-      }
+      partText: String,
+      cardText: String,
+      desktopImageId: String,
+      mobileImageId: String
     },
     data() {
       return {
@@ -36,15 +32,15 @@
         mobileImageUrl: ''
       }
     },
-    created() {
+    mounted() {
       this.$store
         .dispatch(actionTypes.getMedia, {
-          mediaId: this.images.desktopImageId
+          mediaId: this.desktopImageId
         })
         .then((response) => (this.desktopImageUrl = response.source_url))
       this.$store
         .dispatch(actionTypes.getMedia, {
-          mediaId: this.images.mobileImageId
+          mediaId: this.mobileImageId
         })
         .then((response) => (this.mobileImageUrl = response.source_url))
     }

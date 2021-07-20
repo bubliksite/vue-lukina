@@ -21,7 +21,6 @@
       @ended="endedVideo"
       ref="videoBackground"
       :src="videoUrl"
-      :poster="postUrl"
     ></video>
   </div>
 </template>
@@ -34,10 +33,6 @@
     components: {Icon},
     props: {
       videoId: {
-        type: String,
-        required: true
-      },
-      posterId: {
         type: String,
         required: true
       },
@@ -71,11 +66,6 @@
           mediaId: this.videoId
         })
         .then((response) => (this.videoUrl = response.source_url))
-      this.$store
-        .dispatch(mediaActionTypes.getMedia, {
-          mediaId: this.posterId
-        })
-        .then((response) => (this.postUrl = response.source_url))
     },
     methods: {
       playVideo() {

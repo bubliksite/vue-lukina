@@ -23,18 +23,9 @@
     name: 'AboutCenter',
     components: {SmallSocialLinks},
     props: {
-      description: {
-        type: String,
-        required: true
-      },
-      excerpt: {
-        type: String,
-        required: true
-      },
-      photoId: {
-        type: String,
-        required: true
-      }
+      description: String,
+      excerpt: String,
+      photoId: String
     },
     data() {
       return {
@@ -47,7 +38,7 @@
         }
       }
     },
-    created() {
+    mounted() {
       this.$store
         .dispatch(mediaActionTypes.getMedia, {
           mediaId: this.photoId

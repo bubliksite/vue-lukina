@@ -3,13 +3,13 @@
     <h4 class="text-uppercase py-5">{{ program.title.rendered }}</h4>
     <p
       class="pe-md-5 pe-0 pb-lg-5 pb-md-3 pb-2"
-      v-html="program.customFields.about[0]"
+      v-html="program.CFS.about[0]"
     ></p>
     <router-link
       class="text-uppercase"
       :to="{name: 'Program', params: {slug: program.slug}}"
     >
-      {{ program.customFields.link[0] }} →
+      {{ program.CFS.link[0] }} →
     </router-link>
   </div>
 </template>
@@ -18,10 +18,7 @@
   export default {
     name: 'ProgramExcerpt',
     props: {
-      program: {
-        type: Object,
-        required: true
-      }
+      program: Object
     }
   }
 </script>
