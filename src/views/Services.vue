@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header />
     <div v-if="page">
       <carousel :items="1">
         <div
@@ -49,13 +48,12 @@
   import axios from '../api/axios'
   import carousel from 'vue-owl-carousel2'
 
-  import Header from '../components/Header/Header'
   import SectionHeader from '../components/SectionHeader'
   import Slide from '../components/Slide'
 
   export default {
     name: 'Services',
-    components: {Header, SectionHeader, Slide, carousel},
+    components: {SectionHeader, Slide, carousel},
     data() {
       return {
         bullet: require('../assets/images/icons/icon-bullet.svg'),

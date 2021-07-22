@@ -72,6 +72,12 @@
   header {
     z-index: 3;
     top: 0;
+    a {
+      color: #fff !important;
+      :hover {
+        @extend a;
+      }
+    }
     .mobile-menu {
       display: none;
     }

@@ -7,15 +7,7 @@
       :collapseContent="collapseContent"
     />
     <div
-      class="
-        d-flex
-        justify-content-center
-        align-items-center
-        position-absolute
-        top-0
-        w-100
-        h-100
-      "
+      class="d-flex justify-content-center align-items-center position-absolute top-0 w-100 h-100"
     >
       <div
         id="slide-content"
@@ -121,14 +113,6 @@
     .lead {
       font-size: 16px !important;
     }
-    .owl-carousel .owl-item img {
-      width: 25px;
-      height: 25px;
-    }
-    .owl-carousel .owl-item .icon-collapse,
-    .owl-carousel .owl-item .icon-expand {
-      width: 18px;
-    }
   }
   @media screen and (max-width: 850px) {
     .lead {
@@ -150,14 +134,6 @@
   @media screen and (max-width: 420px) {
     .collapse {
       bottom: 2.3rem;
-    }
-    .owl-carousel .owl-item img {
-      width: 18px;
-      height: 18px;
-    }
-    .owl-theme .owl-dots .owl-dot span {
-      width: 10px;
-      height: 10px;
     }
     .lead {
       display: none;

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import {actionTypes} from '../../store/modules/getMedia'
+  import axios from '../../api/axios'
 
   export default {
     name: 'PartnerExcerpt',
@@ -24,10 +24,15 @@
         partnerImageUrl: ''
       }
     },
-    created() {
-      this.$store
-        .dispatch(actionTypes.getMedia, {mediaId: this.partner.image})
-        .then((response) => (this.partnerImageUrl = response.source_url))
+    mounted() {
+      this.getImage(this.partner.image)
+    },
+    methods: {
+      getImage(mediaId) {
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.partnerImageUrl = response.data.source_url))
+      }
     }
   }
 </script>

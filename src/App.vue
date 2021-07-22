@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <Header />
     <router-view />
+    <Footer />
   </div>
 </template>
 
@@ -10,5 +12,12 @@
   }
 </style>
 <script>
-  export default {}
+  import Header from './components/Header/Header'
+  import Footer from './components/Footer'
+  export default {
+    components: {
+      Header,
+      Footer
+    }
+  }
 </script>

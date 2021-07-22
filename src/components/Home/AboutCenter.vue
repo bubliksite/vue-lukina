@@ -16,7 +16,8 @@
 </template>
 
 <script>
-  import {actionTypes as mediaActionTypes} from '../../store/modules/getMedia'
+  import axios from '../../api/axios'
+
   import SmallSocialLinks from '../SmallSocialLinks'
 
   export default {
@@ -39,11 +40,14 @@
       }
     },
     mounted() {
-      this.$store
-        .dispatch(mediaActionTypes.getMedia, {
-          mediaId: this.photoId
-        })
-        .then((response) => (this.photoUrl = response.source_url))
+      this.getImage(this.photoId)
+    },
+    methods: {
+      getImage(mediaId) {
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.photoUrl = response.data.source_url))
+      }
     }
   }
 </script>

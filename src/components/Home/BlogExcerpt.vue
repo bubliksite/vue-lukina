@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import {actionTypes} from '../../store/modules/getMedia'
+  import axios from '../../api/axios'
 
   export default {
     name: 'BlogExcerpt',
@@ -31,12 +31,15 @@
         imageUrl: ''
       }
     },
-    created() {
-      this.$store
-        .dispatch(actionTypes.getMedia, {
-          mediaId: this.post.CFS._thumbnail_id
-        })
-        .then((response) => (this.imageUrl = response.source_url))
+    mounted() {
+      this.getImage(this.post.CFS._thumbnail_id)
+    },
+    methods: {
+      getImage(mediaId) {
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.imageUrl = response.data.source_url))
+      }
     }
   }
 </script>

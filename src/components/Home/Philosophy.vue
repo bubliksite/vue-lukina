@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import {actionTypes} from '../../store/modules/getMedia'
+  import axios from '../../api/axios'
 
   export default {
     name: 'Philosophy',
@@ -33,16 +33,20 @@
       }
     },
     mounted() {
-      this.$store
-        .dispatch(actionTypes.getMedia, {
-          mediaId: this.desktopImageId
-        })
-        .then((response) => (this.desktopImageUrl = response.source_url))
-      this.$store
-        .dispatch(actionTypes.getMedia, {
-          mediaId: this.mobileImageId
-        })
-        .then((response) => (this.mobileImageUrl = response.source_url))
+      this.getDesktopImage(this.desktopImageId)
+      this.getMobileImage(this.mobileImageId)
+    },
+    methods: {
+      getDesktopImage(mediaId) {
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.desktopImageUrl = response.data.source_url))
+      },
+      getMobileImage(mediaId) {
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.mobileImageUrl = response.data.source_url))
+      }
     }
   }
 </script>

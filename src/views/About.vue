@@ -1,11 +1,10 @@
 <template>
-  <div>About Page</div>
+  <div></div>
 </template>
 
 <script>
   export default {
-    name: 'About',
-    mounted() {}
+    name: 'About'
   }
 </script>
 

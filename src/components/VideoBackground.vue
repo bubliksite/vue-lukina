@@ -26,28 +26,18 @@
 </template>
 
 <script>
-  import {actionTypes as mediaActionTypes} from '../store/modules/getMedia'
+  import axios from '../api/axios'
+
   import Icon from './Icon'
+
   export default {
     name: 'VideoBackground',
     components: {Icon},
     props: {
-      videoId: {
-        type: String,
-        required: true
-      },
-      expandContent: {
-        type: Function,
-        required: false
-      },
-      collapseContent: {
-        type: Function,
-        required: false
-      },
-      contentIsCollapse: {
-        type: Boolean,
-        required: false
-      }
+      videoId: String,
+      expandContent: Function,
+      collapseContent: Function,
+      contentIsCollapse: Boolean
     },
     data() {
       return {
@@ -56,18 +46,22 @@
         playDisabled: require('../assets/images/icons/icon-play-disabled.svg'),
         pauseDisabled: require('../assets/images/icons/icon-pause-disabled.svg'),
         playingVideo: false,
+        loader: true,
         videoUrl: '',
         postUrl: ''
       }
     },
-    created() {
-      this.$store
-        .dispatch(mediaActionTypes.getMedia, {
-          mediaId: this.videoId
-        })
-        .then((response) => (this.videoUrl = response.source_url))
+    mounted() {
+      this.getMedia(this.videoId)
     },
     methods: {
+      getMedia(mediaId) {
+        this.loader = true
+        axios
+          .get(`/media/${mediaId}`)
+          .then((response) => (this.videoUrl = response.data.source_url))
+          .then(() => (this.loader = false))
+      },
       playVideo() {
         this.$refs.videoBackground.play()
         this.collapseContent()

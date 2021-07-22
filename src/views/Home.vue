@@ -1,29 +1,27 @@
 <template>
   <div>
-    <Loader v-if="loader" />
-    <div v-else>
-      <Header />
-      <div v-if="page && slider">
+    <div>
+      <div v-if="page">
         <carousel :items="1">
           <div
             class="slide position-relative"
-            v-for="(videoId, index) in slider.videoId"
+            v-for="(videoId, index) in page.CFS.video"
             :key="index"
           >
             <Slide
-              :videoId="videoId"
-              :title="slider.title[index]"
-              :subtitle="slider.subtitle[index]"
-              :isShowButton="slider.isShowButton[index] === '1'"
+              :videoId="page.CFS.video[index]"
+              :title="page.CFS.title[index]"
+              :subtitle="page.CFS.subtitle[index]"
+              :isShowButton="page.CFS.isShowButton[index] === '1'"
             />
           </div>
         </carousel>
       </div>
-      <section class="excerpt bg-primary" v-if="excerpt">
+      <section class="excerpt bg-primary" v-if="page">
         <div class="container py-5">
           <hr />
           <h3 class="text-center py-lg-5 py-md-3 py-2">
-            <em v-html="excerpt"></em>
+            <em v-html="page.CFS.excerpt[0]"></em>
           </h3>
           <hr />
         </div>
@@ -42,10 +40,9 @@
         <div class="container py-5">
           <SectionHeader title="О центре" />
           <AboutCenter
-            v-if="about"
-            :description="about.description"
-            :excerpt="about.excerpt"
-            :photoId="about.photoId"
+            :description="page.CFS.aboutDescription[0]"
+            :excerpt="page.CFS.apoutExcerpt[0]"
+            :photoId="page.CFS.aboutPhoto[0]"
           />
         </div>
       </section>
@@ -53,11 +50,10 @@
         <div class="container py-5">
           <SectionHeader title="Философия" />
           <Philosophy
-            v-if="philosophy"
-            :partText="philosophy.partText"
-            :cardText="philosophy.cardText"
-            :desktopImageId="philosophy.desktopImageId"
-            :mobileImageId="philosophy.mobileImageId"
+            :partText="page.CFS.partText[0]"
+            :cardText="page.CFS.cardText[0]"
+            :desktopImageId="page.CFS.imageDesktop[0]"
+            :mobileImageId="page.CFS.imageMobile[0]"
           />
         </div>
       </section>
@@ -83,129 +79,84 @@
           <div class="row" v-if="page">
             <div
               class="col-lg-3 col-6"
-              v-for="(partner, index) in partners.name"
+              v-for="(partner, index) in page.CFS.partnerName"
               :key="index"
             >
               <PartnerExcerpt
                 :partner="{
-                  image: partner.image[index],
-                  name: partner.name[index]
+                  image: page.CFS.partnerImage[index],
+                  name: page.CFS.partnerName[index]
                 }"
               />
             </div>
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from '../api/axios'
+
   import carousel from 'vue-owl-carousel2'
-  import Header from '../components/Header/Header'
-  import Loader from '../components/Loader'
-  import {actionTypes as pageActionTypes} from '../store/modules/getPage'
-  import {actionTypes as postActionTypes} from '../store/modules/getPosts'
+
   import ProgramExcerpt from '../components/Home/ProgramExcerpt'
   import SectionHeader from '../components/SectionHeader'
   import AboutCenter from '../components/Home/AboutCenter'
   import Philosophy from '../components/Home/Philosophy'
   import BlogExcerpt from '../components/Home/BlogExcerpt'
   import PartnerExcerpt from '../components/Home/PartnerExcerpt'
-  import Footer from '../components/Footer'
   import Slide from '../components/Slide'
 
   export default {
     name: 'Home',
     components: {
       Slide,
-      carousel,
-      Footer,
       PartnerExcerpt,
       BlogExcerpt,
       Philosophy,
       AboutCenter,
       SectionHeader,
       ProgramExcerpt,
-      Loader,
-      Header
+      carousel
     },
     data() {
       return {
-        loader: false,
-        page: {},
+        loader: true,
+        page: null,
         programs: [],
         blogs: []
       }
     },
-    methods: {
-      getThePage() {
-        axios
-          .get('https://admin.lukina.bblk.ga/wp-json/wp/v2/pages/8')
-          .then((response) => (this.page = response.data))
-      }
-    },
-    computed: {
-      slider() {
-        return {
-          videoId: this.page.CFS.video,
-          title: this.page.CFS.title,
-          subtitle: this.page.CFS.subtitle,
-          isShowButton: this.page.CFS.isShowButton
-        }
-      },
-      excerpt() {
-        return this.page.CFS.excerpt[0]
-      },
-      about() {
-        return {
-          description: this.page.CFS.aboutDescription[0],
-          excerpt: this.page.CFS.apoutExcerpt[0],
-          photoId: this.page.CFS.aboutPhoto[0]
-        }
-      },
-      philosophy() {
-        return {
-          partText: this.page.CFS.partText[0],
-          cardText: this.page.CFS.cardText[0],
-          desktopImageId: this.page.CFS.imageDesktop[0],
-          mobileImageId: this.page.CFS.imageMobile[0]
-        }
-      },
-      partners() {
-        return {
-          name: this.page.CFS.partnerName,
-          image: this.page.CFS.partnerImage
-        }
-      }
-    },
     mounted() {
-      this.getThePage()
-      this.$store
-        .dispatch(pageActionTypes.getPage, {
-          pageId: 20
-        })
-        .then((response) => this.programs.unshift(response))
-      this.$store
-        .dispatch(pageActionTypes.getPage, {
-          pageId: 22
-        })
-        .then((response) => this.programs.push(response))
-      this.$store
-        .dispatch(postActionTypes.getAllPostsPerPage, {
-          perPage: 4
-        })
-        .then((response) => (this.blogs = response))
+      this.getHomePage()
+      this.getPrograms()
+      this.getBlogPost()
+    },
+    methods: {
+      getHomePage() {
+        axios.get('/pages/8').then((response) => (this.page = response.data))
+      },
+      getPrograms() {
+        axios
+          .get('/pages/20')
+          .then((response) => this.programs.unshift(response.data))
+        axios
+          .get('/pages/22')
+          .then((response) => this.programs.push(response.data))
+      },
+      getBlogPost() {
+        axios
+          .get('/posts?per_page=4')
+          .then((response) => (this.blogs = response.data))
+          .then(() => (this.loader = false))
+      }
     }
-    // mounted() {
-    //   this.loader = false
-    // }
   }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import 'src/assets/styles/variables';
   .owl-theme .owl-nav {
     display: none;
